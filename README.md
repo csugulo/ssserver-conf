@@ -3,33 +3,33 @@
 shadowsocks服务配置以及Debian/Ubuntu客户端配置，**请勿通过该服务发送垃圾邮件、爬取网页**。
 
 - [ssserver-conf](#ssserver-conf)
-  * [ssserver服务配置](#ssserver----)
-  * [安装配置proxychains/shadowsocks](#----proxychains-shadowsocks)
-    + [安装](#--)
-    + [配置sslocal](#--sslocal)
-    + [配置proxychains](#--proxychains)
-    + [sslocal开机启动服务](#sslocal------)
-    + [测试](#--)
-  * [git配置sock5代理](#git--sock5--)
-  * [go get配置sock5代理](#go-get--sock5--)
+  * [1. ssserver服务配置](#1-ssserver----)
+  * [2. 安装配置proxychains/shadowsocks](#2-----proxychains-shadowsocks)
+    + [2.1 安装](#21---)
+    + [2.2 配置sslocal](#22---sslocal)
+    + [2.3 配置proxychains](#23---proxychains)
+    + [2.4 sslocal开机启动服务](#24-sslocal------)
+    + [2.5 测试](#25---)
+  * [3. git配置sock5代理](#3-git--sock5--)
+  * [4. go get配置sock5代理](#4-go-get--sock5--)
 
-## ssserver服务配置
+## 1. ssserver服务配置
 
 |server|port|password|method|机房|
 |:-:|:-:|:-:|:-:|:-:|
 |cloudcone-la-1.painitch.tech|3921|gulo3921|aes-256-cfb|洛杉矶|
 |aliyun-hk-1.painitch.tech|3921|free|aes-256-cfb|香港|
 
-## 安装配置proxychains/shadowsocks
+## 2. 安装配置proxychains/shadowsocks
 
-### 安装
+### 2.1 安装
 
 ```
 sudo apt update
 sudo apt install git proxychains shadowsocks -y
 ```
 
-### 配置sslocal
+### 2.2 配置sslocal
 
 添加sslocal配置文件/etc/shadowsocks/client.json
 
@@ -45,7 +45,7 @@ sudo apt install git proxychains shadowsocks -y
 }
 ```
 
-### 配置proxychains
+### 2.3 配置proxychains
 
 修改proxychains配置文件/etc/proxychains.conf
 ```
@@ -60,7 +60,7 @@ sudo apt install git proxychains shadowsocks -y
 socks5  127.0.0.1 1080
 ```
 
-### sslocal开机启动服务
+### 2.4 sslocal开机启动服务
 
 添加sslocal开机启动服务/etc/systemd/system/shadowsocks.service
 
@@ -83,14 +83,14 @@ sudo systemctl enable /etc/systemd/system/shadowsocks.service
 sudo reboot
 ```
 
-### 测试
+### 2.5 测试
 
 ```
 proxychains curl https://api.ipify.org/?format=json
 curl https://api.ipify.org/?format=json
 ```
 
-## git配置sock5代理
+## 3. git配置sock5代理
 
 ```
 git config --global http.proxy 'socks5://127.0.0.1:1080'
@@ -98,7 +98,7 @@ git config --global http.proxy 'socks5://127.0.0.1:1080'
 git config --global --unset http.proxy
 ```
 
-## go get配置sock5代理
+## 4. go get配置sock5代理
 
 添加bash脚本~/bin/go-get-proxy
 
