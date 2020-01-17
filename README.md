@@ -17,7 +17,7 @@ shadowsocks服务配置以及Debian/Ubuntu客户端配置，**请勿通过该服
 
 |server|port|password|method|机房|
 |:-:|:-:|:-:|:-:|:-:|
-|cloudcone-la-1.painitch.tech|3921|gulo3921|aes-256-cfb|洛杉矶|
+|cloudcone-la-1.painitch.tech|3921|free|aes-256-cfb|洛杉矶|
 |aliyun-hk-1.painitch.tech|3921|free|aes-256-cfb|香港|
 
 ## 2. 安装配置proxychains/shadowsocks
