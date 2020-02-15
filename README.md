@@ -12,12 +12,11 @@ V2ray服务配置以及Debian/Ubuntu客户端配置，**请勿通过该服务发
   * [3. git配置sock5代理](#3-git--sock5--)
   * [4. go get配置sock5代理](#4-go-get--sock5--)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
 
 ## 1. V2ray客户端配置文件
 
 |实例机房|实例配置文件|
+|:-:|:-:|
 |洛杉矶|[aliyun-hk.json](https://raw.githubusercontent.com/csugulo/v2ray-config/master/config/aliyun-hk.json)|
 |香港|[cloudcone-la.json](https://raw.githubusercontent.com/csugulo/v2ray-config/master/config/cloudcone-la.json)|
 
@@ -35,9 +34,7 @@ sudo bash go.sh
 
 ### 2.2 配置V2ray客户端配置文件
 
-将1中的任意配置文件复制到/etc/v2ray/config.json
-
-启动V2ray
+将配置文件复制到/etc/v2ray/config.json，启动V2ray
 ```
 sudo systemctl start v2ray
 ```
