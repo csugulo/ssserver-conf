@@ -1,48 +1,45 @@
-# ssserver-conf
+# V2ray-config
 
-shadowsocks服务配置以及Debian/Ubuntu客户端配置，**请勿通过该服务发送垃圾邮件、爬取网页**。
+V2ray服务配置以及Debian/Ubuntu客户端配置，**请勿通过该服务发送垃圾邮件、爬取网页**。
 
-- [ssserver-conf](#ssserver-conf)
-  * [1. ssserver服务配置](#1-ssserver----)
-  * [2. 安装配置proxychains/shadowsocks](#2-----proxychains-shadowsocks)
+- [V2ray-config](#v2ray-config)
+  * [1. V2ray客户端配置文件](#1-v2ray-------)
+  * [2. 安装配置proxychains/V2ray](#2-----proxychains-v2ray)
     + [2.1 安装](#21---)
-    + [2.2 配置sslocal](#22---sslocal)
+    + [2.2 配置V2ray客户端配置文件](#22---v2ray-------)
     + [2.3 配置proxychains](#23---proxychains)
-    + [2.4 sslocal开机启动服务](#24-sslocal------)
     + [2.5 测试](#25---)
   * [3. git配置sock5代理](#3-git--sock5--)
   * [4. go get配置sock5代理](#4-go-get--sock5--)
 
-## 1. ssserver服务配置
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
-|server|port|password|method|机房|
-|:-:|:-:|:-:|:-:|:-:|
-|cloudcone-la-1.painitch.tech|3921|free|aes-256-cfb|洛杉矶|
-|aliyun-hk-1.painitch.tech|3921|free|aes-256-cfb|香港|
 
-## 2. 安装配置proxychains/shadowsocks
+## 1. V2ray客户端配置文件
+
+|实例机房|实例配置文件|
+|洛杉矶|[aliyun-hk.json](https://raw.githubusercontent.com/csugulo/v2ray-config/master/config/aliyun-hk.json)|
+|香港|[cloudcone-la.json](https://raw.githubusercontent.com/csugulo/v2ray-config/master/config/cloudcone-la.json)|
+
+## 2. 安装配置proxychains/V2ray
 
 ### 2.1 安装
 
 ```
 sudo apt update
-sudo apt install git proxychains shadowsocks -y
+sudo apt install git proxychains -y
+
+wget https://install.direct/go.sh
+sudo bash go.sh
 ```
 
-### 2.2 配置sslocal
+### 2.2 配置V2ray客户端配置文件
 
-添加sslocal配置文件/etc/shadowsocks/client.json
+将1中的任意配置文件复制到/etc/v2ray/config.json
 
+启动V2ray
 ```
-{
-    "server":"aliyun-hk-1.painitch.tech",
-    "server_port":3921,
-    "local_address":"127.0.0.1",
-    "local_port":1080,
-    "password":"free",
-    "timeout":300,
-    "method":"aes-256-cfb"
-}
+sudo systemctl start v2ray
 ```
 
 ### 2.3 配置proxychains
@@ -58,29 +55,6 @@ sudo apt install git proxychains shadowsocks -y
 # meanwile
 # defaults set to "tor"
 socks5  127.0.0.1 1080
-```
-
-### 2.4 sslocal开机启动服务
-
-添加sslocal开机启动服务/etc/systemd/system/shadowsocks.service
-
-```
-[Unit]
-Description=Shadowsocks Client Service
-After=network.target
-[Service]
-Type=simple
-User=root
-ExecStart=/usr/bin/sslocal -c /etc/shadowsocks/client.json
-[Install]
-WantedBy=multi-user.target
-```
-
-启用服务并重启计算机
-
-```
-sudo systemctl enable /etc/systemd/system/shadowsocks.service
-sudo reboot
 ```
 
 ### 2.5 测试
